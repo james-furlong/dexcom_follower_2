@@ -1,0 +1,18 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Dexcom Follower' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  pod 'RxSwift', '~> 4.4'
+  pod 'RxCocoa', '~> 4.4'
+  pod 'RxDataSources', '~> 3.1'
+  pod 'OAuthSwift', '~> 1.2.0'
+  use_frameworks!
+
+  # Pods for Dexcom Follower
+
+  target 'Dexcom FollowerTests' do
+    inherit! :search_paths
+  end
+
+end
