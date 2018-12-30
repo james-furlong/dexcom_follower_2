@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class DashboardViewModel {
+class DashboardViewModel: ApiClientInjected {
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Actions

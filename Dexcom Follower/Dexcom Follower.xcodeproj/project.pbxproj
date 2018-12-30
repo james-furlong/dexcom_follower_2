@@ -14,6 +14,12 @@
 		1A2E257421D5AE8A00B30497 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257321D5AE8A00B30497 /* AuthClient.swift */; };
 		1A2E257621D5AFE100B30497 /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */; };
 		1A2E257821D960AB00B30497 /* DeepLinkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257721D960AB00B30497 /* DeepLinkClient.swift */; };
+		1A2E257A21D96D9F00B30497 /* ApiClientInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257921D96D9F00B30497 /* ApiClientInjected.swift */; };
+		1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257C21D97E3F00B30497 /* DevicesResponse.swift */; };
+		1A2E258021D9866E00B30497 /* CalibrationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257F21D9866E00B30497 /* CalibrationsResponse.swift */; };
+		1A2E258321D988F400B30497 /* EgvResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258221D988F400B30497 /* EgvResponse.swift */; };
+		1A2E258621D98B6700B30497 /* EventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258521D98B6700B30497 /* EventsResponse.swift */; };
+		1A2E258921D98D9D00B30497 /* StatisticsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258821D98D9D00B30497 /* StatisticsResponse.swift */; };
 		1A3F3ADF2197F0F0002302A1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3ADE2197F0F0002302A1 /* Theme.swift */; };
 		1A3F3AE12197F3FA002302A1 /* Theme+Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */; };
 		1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE32197F6F0002302A1 /* GradientView.swift */; };
@@ -57,6 +63,12 @@
 		1A2E257321D5AE8A00B30497 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaders.swift; sourceTree = "<group>"; };
 		1A2E257721D960AB00B30497 /* DeepLinkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkClient.swift; sourceTree = "<group>"; };
+		1A2E257921D96D9F00B30497 /* ApiClientInjected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientInjected.swift; sourceTree = "<group>"; };
+		1A2E257C21D97E3F00B30497 /* DevicesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesResponse.swift; sourceTree = "<group>"; };
+		1A2E257F21D9866E00B30497 /* CalibrationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationsResponse.swift; sourceTree = "<group>"; };
+		1A2E258221D988F400B30497 /* EgvResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EgvResponse.swift; sourceTree = "<group>"; };
+		1A2E258521D98B6700B30497 /* EventsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsResponse.swift; sourceTree = "<group>"; };
+		1A2E258821D98D9D00B30497 /* StatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsResponse.swift; sourceTree = "<group>"; };
 		1A3F3ADE2197F0F0002302A1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Dashboard.swift"; sourceTree = "<group>"; };
 		1A3F3AE32197F6F0002302A1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -126,6 +138,46 @@
 				1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1A2E257B21D97E3000B30497 /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E257C21D97E3F00B30497 /* DevicesResponse.swift */,
+			);
+			path = Devices;
+			sourceTree = "<group>";
+		};
+		1A2E257E21D9865F00B30497 /* Calibrations */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E257F21D9866E00B30497 /* CalibrationsResponse.swift */,
+			);
+			path = Calibrations;
+			sourceTree = "<group>";
+		};
+		1A2E258121D988DE00B30497 /* Estimated Glucose Value */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E258221D988F400B30497 /* EgvResponse.swift */,
+			);
+			path = "Estimated Glucose Value";
+			sourceTree = "<group>";
+		};
+		1A2E258421D98B5100B30497 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E258521D98B6700B30497 /* EventsResponse.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		1A2E258721D98D8200B30497 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E258821D98D9D00B30497 /* StatisticsResponse.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 		1A3F3ADD2197F0DC002302A1 /* Theme */ = {
@@ -205,6 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				1A2E256D21D5A64F00B30497 /* Authentication */,
+				1A2E257E21D9865F00B30497 /* Calibrations */,
+				1A2E257B21D97E3000B30497 /* Devices */,
+				1A2E258121D988DE00B30497 /* Estimated Glucose Value */,
+				1A2E258421D98B5100B30497 /* Events */,
+				1A2E258721D98D8200B30497 /* Statistics */,
 				1A5D994C21BB99190095E899 /* Subjects */,
 				1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */,
 			);
@@ -242,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				1AABB7AA21BC949100C18E2D /* EnvironmentInjected.swift */,
+				1A2E257921D96D9F00B30497 /* ApiClientInjected.swift */,
 			);
 			path = Injectors;
 			sourceTree = "<group>";
@@ -562,9 +620,13 @@
 				1AABB7AD21BC95FE00C18E2D /* Namespace.swift in Sources */,
 				1AABB7A821BC908E00C18E2D /* Environment.swift in Sources */,
 				1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */,
+				1A2E258021D9866E00B30497 /* CalibrationsResponse.swift in Sources */,
+				1A2E258621D98B6700B30497 /* EventsResponse.swift in Sources */,
 				1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */,
 				1A3F3AE12197F3FA002302A1 /* Theme+Dashboard.swift in Sources */,
 				1AABB7B321BC996800C18E2D /* LoginViewModel.swift in Sources */,
+				1A2E258321D988F400B30497 /* EgvResponse.swift in Sources */,
+				1A2E258921D98D9D00B30497 /* StatisticsResponse.swift in Sources */,
 				1AABB7AB21BC949100C18E2D /* EnvironmentInjected.swift in Sources */,
 				1A5D994E21BB992F0095E899 /* SubjectResponse.swift in Sources */,
 				1A2E257621D5AFE100B30497 /* HTTPHeaders.swift in Sources */,
@@ -576,10 +638,12 @@
 				1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */,
 				1A5D994121BB8DFC0095E899 /* SubjectTableViewCell.swift in Sources */,
 				1AABB7B521BC997500C18E2D /* LoginViewController.swift in Sources */,
+				1A2E257A21D96D9F00B30497 /* ApiClientInjected.swift in Sources */,
 				1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */,
 				1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */,
 				1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */,
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
+				1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */,
 				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

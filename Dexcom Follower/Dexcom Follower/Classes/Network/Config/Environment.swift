@@ -22,6 +22,7 @@ protocol Environment {
     static var httpProtocol: String { get }
     static var baseUrl: String { get }
     static var version: String { get }
+    static var apiClient: ApiClientType { get }
 }
 
 // MARK: - Target
@@ -57,7 +58,7 @@ struct MockEnvironment: Environment {
     static var httpProtocol: String = "https"
     static var baseUrl: String = ""
     static var version: String = "1"
-    
+    static var apiClient: ApiClientType = Network.ApiClient()
     
 }
 
@@ -68,6 +69,7 @@ struct StagingEnvironment: Environment {
     static var httpProtocol: String = "https"
     static var baseUrl: String = "sandbox-api.dexcom.com"
     static var version: String = "1"
+    static var apiClient: ApiClientType = Network.ApiClient()
 }
 
 struct ProductionEnvironment: Environment {
@@ -77,4 +79,5 @@ struct ProductionEnvironment: Environment {
     static var httpProtocol: String = "https"
     static var baseUrl: String = "api.dexcom.com"
     static var version: String = "1"
+    static var apiClient: ApiClientType = Network.ApiClient()
 }
