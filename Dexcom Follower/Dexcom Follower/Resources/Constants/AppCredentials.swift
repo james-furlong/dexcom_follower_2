@@ -11,5 +11,6 @@ import Foundation
 struct Credentials {
     static let clientId: String = "b7fFFf0v8Su9fiAcAq3HatLu0ydfhnDX"
     static let clientSecret: String = "Luq5GGR9emHQq1aG"
+    static let returnUri: String = "dexcomBetterFollower://com.au.jamesfurlong.Dexcom-Follower"
 }
 

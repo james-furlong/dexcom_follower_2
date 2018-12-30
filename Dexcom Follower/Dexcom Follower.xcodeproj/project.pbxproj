@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0455A58BBD6AE86E8D13F93C /* Pods_Dexcom_FollowerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9A3FC6F45014C7CA2C72E3 /* Pods_Dexcom_FollowerTests.framework */; };
+		1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256B21D5A14F00B30497 /* URL+extensions.swift */; };
+		1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256E21D5A6A400B30497 /* TokenResponse.swift */; };
+		1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */; };
+		1A2E257421D5AE8A00B30497 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257321D5AE8A00B30497 /* AuthClient.swift */; };
+		1A2E257621D5AFE100B30497 /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */; };
+		1A2E257821D960AB00B30497 /* DeepLinkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257721D960AB00B30497 /* DeepLinkClient.swift */; };
 		1A3F3ADF2197F0F0002302A1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3ADE2197F0F0002302A1 /* Theme.swift */; };
 		1A3F3AE12197F3FA002302A1 /* Theme+Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */; };
 		1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE32197F6F0002302A1 /* GradientView.swift */; };
@@ -25,7 +31,6 @@
 		1AABB7B721BC9A0100C18E2D /* Theme+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */; };
 		1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */; };
 		1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */; };
-		1AABB7BD21BCAE7D00C18E2D /* DeeplinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7BC21BCAE7D00C18E2D /* DeeplinkType.swift */; };
 		1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF77B2A2197AD4000C50911 /* AppDelegate.swift */; };
 		1AF77B322197AD4200C50911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF77B312197AD4200C50911 /* Assets.xcassets */; };
 		1AF77B352197AD4200C50911 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF77B332197AD4200C50911 /* LaunchScreen.storyboard */; };
@@ -46,6 +51,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A2E256B21D5A14F00B30497 /* URL+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extensions.swift"; sourceTree = "<group>"; };
+		1A2E256E21D5A6A400B30497 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		1A2E257321D5AE8A00B30497 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
+		1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaders.swift; sourceTree = "<group>"; };
+		1A2E257721D960AB00B30497 /* DeepLinkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkClient.swift; sourceTree = "<group>"; };
 		1A3F3ADE2197F0F0002302A1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Dashboard.swift"; sourceTree = "<group>"; };
 		1A3F3AE32197F6F0002302A1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -63,7 +74,6 @@
 		1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Login.swift"; sourceTree = "<group>"; };
 		1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utilities.swift"; sourceTree = "<group>"; };
 		1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		1AABB7BC21BCAE7D00C18E2D /* DeeplinkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkType.swift; sourceTree = "<group>"; };
 		1AF77B272197AD4000C50911 /* Dexcom Follower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dexcom Follower.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF77B2A2197AD4000C50911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AF77B312197AD4200C50911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,6 +112,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A2E256D21D5A64F00B30497 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E256E21D5A6A400B30497 /* TokenResponse.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		1A2E257021D5AE1D00B30497 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1A3F3ADD2197F0DC002302A1 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5D994721BB97350095E899 /* UIKIt */,
+				1A2E256B21D5A14F00B30497 /* URL+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -165,6 +192,7 @@
 		1A5D994A21BB99080095E899 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				1A2E257021D5AE1D00B30497 /* Helpers */,
 				1AABB7A921BC947300C18E2D /* Injectors */,
 				1AABB7A621BC907E00C18E2D /* Config */,
 				1AABB7A321BC8FD200C18E2D /* Clients */,
@@ -176,7 +204,9 @@
 		1A5D994B21BB99130095E899 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				1A2E256D21D5A64F00B30497 /* Authentication */,
 				1A5D994C21BB99190095E899 /* Subjects */,
+				1A2E257521D5AFE100B30497 /* HTTPHeaders.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -193,7 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				1AABB7A421BC8FEE00C18E2D /* ApiClient.swift */,
-				1AABB7BC21BCAE7D00C18E2D /* DeeplinkType.swift */,
+				1A2E257321D5AE8A00B30497 /* AuthClient.swift */,
+				1A2E257721D960AB00B30497 /* DeepLinkClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -525,15 +556,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AABB7A521BC8FEE00C18E2D /* ApiClient.swift in Sources */,
-				1AABB7BD21BCAE7D00C18E2D /* DeeplinkType.swift in Sources */,
+				1A2E257421D5AE8A00B30497 /* AuthClient.swift in Sources */,
+				1A2E257821D960AB00B30497 /* DeepLinkClient.swift in Sources */,
 				1AABB7B721BC9A0100C18E2D /* Theme+Login.swift in Sources */,
 				1AABB7AD21BC95FE00C18E2D /* Namespace.swift in Sources */,
 				1AABB7A821BC908E00C18E2D /* Environment.swift in Sources */,
+				1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */,
 				1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */,
 				1A3F3AE12197F3FA002302A1 /* Theme+Dashboard.swift in Sources */,
 				1AABB7B321BC996800C18E2D /* LoginViewModel.swift in Sources */,
 				1AABB7AB21BC949100C18E2D /* EnvironmentInjected.swift in Sources */,
 				1A5D994E21BB992F0095E899 /* SubjectResponse.swift in Sources */,
+				1A2E257621D5AFE100B30497 /* HTTPHeaders.swift in Sources */,
 				1A5D994521BB96270095E899 /* ReuseableView.swift in Sources */,
 				1A5D994921BB97530095E899 /* UITableView+Utilities.swift in Sources */,
 				1AF77B512197D7C700C50911 /* DashboardViewController.swift in Sources */,
@@ -544,7 +578,9 @@
 				1AABB7B521BC997500C18E2D /* LoginViewController.swift in Sources */,
 				1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */,
 				1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */,
+				1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */,
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
+				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

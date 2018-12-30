@@ -9,12 +9,18 @@
 import RxSwift
 import RxCocoa
 import SafariServices
+import OAuthSwift
 
 class LoginViewController: UIViewController, EnvironmentInjected {
     private let disposeBag: DisposeBag = DisposeBag()
     private let viewModel: LoginViewModel = LoginViewModel()
     
     private let buttonHeight: CGFloat = 60
+    
+    enum alertType {
+        case error
+        case information
+    }
     
     // MARK: - UI
     
@@ -98,9 +104,42 @@ class LoginViewController: UIViewController, EnvironmentInjected {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                let base: String = Environment.baseUrl
+                let redirectUri: String = Credentials.returnUri
+                let url: String = "https://sandbox-api.dexcom.com/v2/oauth2/login"
+                let oAuthSwift = OAuth2Swift(
+                    consumerKey: Credentials.clientId,
+                    consumerSecret: Credentials.clientSecret,
+                    authorizeUrl: url,
+                    accessTokenUrl: redirectUri,
+                    responseType: "code"
+                )
+                oAuthSwift.allowMissingStateCheck = true
+                oAuthSwift.authorizeURLHandler = SafariURLHandler(viewController: self ?? UIViewController(), oauthSwift: oAuthSwift)
+                guard let rwURL: URL = URL(string: Credentials.returnUri) else { return}
                 
+                oAuthSwift.authorize(withCallbackURL: rwURL, scope: "offline_access", state: "", success: {
+                    (credential, response, parameters) in
+                    print(response)
+                    
+                }, failure: { (error) in
+                    self?.presentAlert(type: .error, message: error.localizedDescription)
+                })
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func presentAlert(type: alertType, message: String) {
+        var title: String = ""
+        var message: String = ""
+        switch type {
+            case .error:
+                title = "Error"
+                message = "Something went wrong"
+            case .information:
+                title = "Alert"
+                message = "Please try again"
+        }
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
     }
 }

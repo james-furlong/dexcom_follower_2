@@ -7,7 +7,8 @@
 //
 
 enum Endpoint {
-    case login
+    case login(String, String)
+    case authenticationToken(String)
     case calibrations
     case dataRange
     case devices
@@ -19,7 +20,9 @@ enum Endpoint {
     
     var path: String {
         switch self {
-        case .login: return "v2/oauth2/login?client_id={your_client_id}&redirect_uri={your_redirect_uri}&response_type=code&scope=offline_access&state=?"
+        case .login(let clientId, let redirctUri): return "v2/oauth2/login?client_id=\(clientId)&redirect_uri=\(redirctUri)&response_type=code&scope=offline_access&state=?"
+        case .authenticationToken(let token): return "/v2/oauth2/\(token)"
+        default: return "nil"
         }
     }
 }
