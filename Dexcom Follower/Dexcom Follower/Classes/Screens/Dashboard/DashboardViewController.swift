@@ -74,6 +74,17 @@ class DashboardViewController: UIViewController {
         return tableView
     }()
     
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.style = .whiteLarge
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.color = .black
+        indicator.startAnimating()
+        
+        return indicator
+    }()
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -126,6 +137,22 @@ class DashboardViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { egvs in
                 print("_)")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.beginLoadingAnimation
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.loadingIndicator.startAnimating()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.stopLoadingAnimation
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.loadingIndicator.stopAnimating()
             })
             .disposed(by: disposeBag)
     }

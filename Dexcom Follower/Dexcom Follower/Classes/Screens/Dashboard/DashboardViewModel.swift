@@ -30,12 +30,13 @@ class DashboardViewModel: ApiClientInjected {
     
     let viewDidAppear: PublishSubject<Void> = PublishSubject()
     let getLevels: PublishSubject<Void> = PublishSubject()
+    let dataFinishedLoading: PublishSubject<Void> = PublishSubject()
+    let dataFailedToLoad: PublishSubject<Void> = PublishSubject()
     let editTapped: PublishSubject<Void> = PublishSubject()
     
     // MARK: - Observables
     
     lazy var devicesSingle: Observable<DeviceResponse> = {
-//        viewDidAppear
         Observable.just(())
             .map { [weak self] _ in
                 let token: String = KeychainWrapper.shared[KeychainWrapper.authenticationToken] ?? ""
@@ -102,6 +103,7 @@ class DashboardViewModel: ApiClientInjected {
                 let units = values.unit
                 let user: User = User(value: glucoseLevel, lastUpdated: timeSinceLastUpdate, units: units, trendArrow: trendArrow)
                 userArray.append(user)
+                self?.dataFinishedLoading.onNext(())
                 return userArray
             }
             .bind(to: relay)
@@ -110,21 +112,15 @@ class DashboardViewModel: ApiClientInjected {
         return relay.asObservable()
     }()
     
-    lazy var subjectsArray: Observable<[Subject]> = {
-        let mockArray: [Subject] = [
-            Subject(
-                name: "Test Subject",
-                measurement: "7.4",
-                isActive: true
-            ),
-            Subject(
-                name: "Second Subject",
-                measurement: "---",
-                isActive: false
-            )
-        ]
-
-        return Observable.just(mockArray).asObservable()
+    lazy var beginLoadingAnimation: Observable<Void> = {
+        viewDidAppear
+            .asObserver()
+    }()
+    
+    lazy var stopLoadingAnimation: Observable<Void> = {
+        dataFinishedLoading
+            .throttle(0.250, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .asObservable()
     }()
     
     // MARK: Internal functions

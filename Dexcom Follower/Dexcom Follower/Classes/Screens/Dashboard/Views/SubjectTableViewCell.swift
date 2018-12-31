@@ -110,7 +110,6 @@ class SubjectTableViewCell: UITableViewCell {
         self.unitsLabel.text = item.units
         self.measurementLabel.text = String(format: "%.1f", item.value)
         
-        
         switch item.value {
             case _ where item.value < 4.5 && item.value >= 4.0:
                 self.contentView.backgroundColor = Theme.Color.subjectCellOkBackground
@@ -121,5 +120,8 @@ class SubjectTableViewCell: UITableViewCell {
             default :
                 self.contentView.backgroundColor = Theme.Color.subjectCellGoodBackground
         }
+        self.subjectName.isHidden = self.subjectName.text?.isEmpty ?? true
+        self.measurementLabel.isHidden = self.measurementLabel.text?.isEmpty ?? true
+        self.unitsLabel.isHidden = self.unitsLabel.text?.isEmpty ?? true
     }
 }
