@@ -104,28 +104,34 @@ class LoginViewController: UIViewController, EnvironmentInjected {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                let redirectUri: String = Credentials.returnUri
-                let url: String = "https://sandbox-api.dexcom.com/v2/oauth2/login"
-                let oAuthSwift = OAuth2Swift(
-                    consumerKey: Credentials.clientId,
-                    consumerSecret: Credentials.clientSecret,
-                    authorizeUrl: url,
-                    accessTokenUrl: redirectUri,
-                    responseType: "code"
-                )
-                oAuthSwift.allowMissingStateCheck = true
-                oAuthSwift.authorizeURLHandler = SafariURLHandler(viewController: self ?? UIViewController(), oauthSwift: oAuthSwift)
-                guard let rwURL: URL = URL(string: Credentials.returnUri) else { return}
-                
-                oAuthSwift.authorize(withCallbackURL: rwURL, scope: "offline_access", state: "", success: {
-                    (credential, response, parameters) in
-                    print(response)
-                    
-                }, failure: { (error) in
-                    self?.presentAlert(type: .error, message: error.localizedDescription)
-                })
+                let _ = self?.loadToken() { token in
+                    // save token, move to dashboard and load
+                }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func loadToken(successCallBack: @escaping(String) -> ()) {
+        let redirectUri: String = Credentials.returnUri
+        let url: String = "https://sandbox-api.dexcom.com/v2/oauth2/login"
+        let oAuthSwift = OAuth2Swift(
+            consumerKey: Credentials.clientId,
+            consumerSecret: Credentials.clientSecret,
+            authorizeUrl: url,
+            accessTokenUrl: redirectUri,
+            responseType: "code"
+        )
+        oAuthSwift.allowMissingStateCheck = true
+        oAuthSwift.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: oAuthSwift)
+        guard let rwURL: URL = URL(string: Credentials.returnUri) else { return}
+        
+        let handle = oAuthSwift.authorize(withCallbackURL: rwURL, scope: "offline_access", state: "", success: {
+            (credential, response, parameters) in
+            print("This is a \(response)")
+            successCallBack("")
+        }, failure: { (error) in
+            self.presentAlert(type: .error, message: error.localizedDescription)
+        })
     }
     
     private func presentAlert(type: alertType, message: String) {

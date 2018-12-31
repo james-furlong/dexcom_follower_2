@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,13 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        OAuthSwift.handle(url: url)
         let deepLinkClient: DeepLinkClient = DeepLinkClient(app: app, url: url, options: options)
         let result = deepLinkClient.handleDeepLink()
         guard result.0 else { return false }
         var viewController: UIViewController = UIViewController()
         switch result.1 {
         case .login:
-            viewController = DashboardViewController()
+            viewController = LoadingViewController()
         case .error:
             print("ERROR")
             // TODO: Insert code for alert to advise of error

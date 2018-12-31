@@ -90,6 +90,11 @@ class DashboardViewController: UIViewController {
         setupBinding()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        viewModel.viewDidAppear.onNext(())
+    }
+    
     // MARK: - Layout
     
     private func setupLayout() {
@@ -112,6 +117,16 @@ class DashboardViewController: UIViewController {
     // MARK: - Binding
     
     private func setupBinding() {
+        self.rx.viewDidAppear
+            .bind(to: viewModel.viewDidAppear)
+            .disposed(by: disposeBag)
         
+        viewModel.devicesArray
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                print("_)")
+            })
+            .disposed(by: disposeBag)
     }
 }

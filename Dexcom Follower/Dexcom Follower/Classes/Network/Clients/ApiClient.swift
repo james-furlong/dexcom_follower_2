@@ -11,7 +11,13 @@ import RxSwift
 protocol ApiClientType: EnvironmentInjected {
     
     // Login
-    func loginToken(authenticationCode: String) -> Single<TokenResponse>
+    func loginToken(authenticationCode: String, complete: @escaping(TokenResponse) -> ())
+    
+    // Devices
+    func getDevices(token: String) -> DeviceResponse
+    
+    // Estimated Glucose Values
+    func getEgvs(token: String) 
     
 }
 
@@ -20,7 +26,7 @@ extension Network {
         private static let timeoutInterval: TimeInterval = 10
         
         // Login
-        func loginToken(authenticationCode: String) -> Single<TokenResponse> {
+        func loginToken(authenticationCode: String, complete: @escaping(TokenResponse) -> ()) {
             let headers = [
                 "content-type": "application/x-www-form-urlencoded",
                 "cache-control": "no-cache"
@@ -32,7 +38,7 @@ extension Network {
             postData.append("&grant_type=authorization_code".data(using: String.Encoding.utf8)!)
             postData.append("&redirect_uri=\(Credentials.returnUri)".data(using: String.Encoding.utf8)!)
             
-            let request = NSMutableURLRequest(url: NSURL(string: "https://api.dexcom.com/v2/oauth2/token")! as URL,
+            let request = NSMutableURLRequest(url: NSURL(string: "https://sandbox-api.dexcom.com/v2/oauth2/token")! as URL,
                                               cachePolicy: .useProtocolCachePolicy,
                                               timeoutInterval: 10.0)
             request.httpMethod = "POST"
@@ -40,7 +46,6 @@ extension Network {
             request.httpBody = postData as Data
             
             let session = URLSession.shared
-            var decoded: TokenResponse = TokenResponse.defaultResponse()
             
             let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                 
@@ -48,43 +53,49 @@ extension Network {
                 do {
                     let decoder: JSONDecoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    decoded = try decoder.decode(TokenResponse.self, from: unwrappedData)
-                    return
+                    let decoded = try decoder.decode(TokenResponse.self, from: unwrappedData)
+                    complete(decoded)
                 } catch {
                     return
                 }
             })
             dataTask.resume()
-            return Single.just(decoded)
         }
         
         // Devices
-        func getDevices(token: String) {
+        func getDevices(token: String) -> DeviceResponse {
             let headers = ["authorization": "Bearer \(token)"]
             let endpointString: String = "\(httpProtocol)\(Endpoint.devices)"
             let df: ISO8601DateFormatter = ISO8601DateFormatter()
             let endDate: String = df.string(from: Date())
             let startDate: String = df.string(from: .init(timeIntervalSinceNow: -3600))
-            guard let url: URL = URL(string: "\(endpointString)?startDate=\(startDate)&endDate=\(endDate)") else { return }
-            
-            let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-            request.httpMethod = "GET"
-            request.allHTTPHeaderFields = headers
-            
-            let session = URLSession.shared
-            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-                if (error != nil) {
-                    print(error)
-                } else {
-                    let httpResponse = response as? HTTPURLResponse
-                    print(httpResponse)
-                    if data != nil {
-                        
+            var decoded: DeviceResponse = DeviceResponse.defaultResponse()
+            if let url: URL = URL(string: "\(endpointString)?startDate=\(startDate)&endDate=\(endDate)") {
+                let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+                request.httpMethod = "GET"
+                request.allHTTPHeaderFields = headers
+                
+                let session = URLSession.shared
+                let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+                    if (error != nil) {
+                        // TODO: Display error
+                    } else {
+                        guard let unwrappedData = data else { return }
+                        do {
+                            let decoder: JSONDecoder = JSONDecoder()
+                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                            decoded = try decoder.decode(DeviceResponse.self, from: unwrappedData)
+                            return
+                        } catch {
+                            // TODO: Handle error for decoding
+                            return
+                        }
                     }
-                }
-            })
-            
-            dataTask.resume()
+                })
+                
+                dataTask.resume()
+            }
+            return decoded
         }
         
         // Estimated Glucose Values
