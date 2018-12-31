@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DevicesResponse: Hashable {
+struct DeviceResponse: Hashable {
     let devices: [Devices]
 }
 
@@ -45,14 +45,18 @@ struct AlertSettings: Hashable {
 
 // MARK: Codable
 
-extension DevicesResponse: Decodable {
+extension DeviceResponse: Decodable {
     enum CodingKeys: String, CodingKey {
         case devices = "devices"
     }
     
     init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
-        self = DevicesResponse(devices: try container.decode([Devices].self, forKey: .devices))
+        self = DeviceResponse(devices: try container.decode([Devices].self, forKey: .devices))
+    }
+    
+    static func defaultResponse() -> DeviceResponse {
+        return DeviceResponse(devices: [Devices]())
     }
 }
 
@@ -137,3 +141,4 @@ extension AlertSettings: Decodable {
         )
     }
 }
+
