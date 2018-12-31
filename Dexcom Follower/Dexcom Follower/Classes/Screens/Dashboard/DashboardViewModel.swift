@@ -10,33 +10,64 @@ import RxSwift
 import RxCocoa
 
 class DashboardViewModel: ApiClientInjected {
+    
+    enum Trend: String {
+        case doubleUp = "doubleUp"
+        case singleUp = "singleUp"
+        case fortyFiveUp = "fortyFiveUp"
+        case flat = "flat"
+        case fortyFiveDown = "fortyFiveDown"
+        case singleDown = "singleDown"
+        case doubleDown = "doubleDown"
+        case none = "none"
+        case notComputable = "notComputable"
+        case rateOutOfRange = "rateOutOfRange"
+    }
+    
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Actions
     
     let viewDidAppear: PublishSubject<Void> = PublishSubject()
+    let getLevels: PublishSubject<Void> = PublishSubject()
     let editTapped: PublishSubject<Void> = PublishSubject()
     
     // MARK: - Observables
     
     lazy var devicesSingle: Observable<DeviceResponse> = {
-        viewDidAppear
-//            .map { [weak self] _ in
-//                let code: String = KeychainWrapper.shared[KeychainWrapper.authenticationCode] ?? ""
-//                self?.apiClient.loginToken(authenticationCode: code) { (response: TokenResponse) in
-//                    KeychainWrapper.shared[KeychainWrapper.authenticationToken] = response.accessToken
-//                }
-//                return
-//            }
-            .map { [weak self] token in
+//        viewDidAppear
+        Observable.just(())
+            .map { [weak self] _ in
                 let token: String = KeychainWrapper.shared[KeychainWrapper.authenticationToken] ?? ""
-                let devices = self?.apiClient.getDevices(token: token) ?? DeviceResponse(devices: [Devices]())
+                var devices: DeviceResponse = DeviceResponse.defaultResponse()
+                self?.apiClient.getDevices(token: token) { response in
+                    devices = response
+                }
                 return devices
             }
             .asObservable()
     }()
     
-    lazy var devicesArray: Observable<DeviceResponse> = {
+    lazy var estimatedGlucoseValues: Observable<EgvResponse> = {
+        let relay: BehaviorRelay<EgvResponse> = BehaviorRelay(value: EgvResponse.defaultResponse())
+        
+        viewDidAppear
+            .subscribe(onNext: { [weak self] _ -> Void in
+                guard let token: String = KeychainWrapper.shared[KeychainWrapper.authenticationToken] else {
+                    return
+                }
+                self?.apiClient.getEgvs(token: token) { response in
+                    relay.accept(response)
+                    self?.getLevels.onNext(())
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
+        return relay.asObservable()
+    }()
+    
+    lazy var devices: Observable<DeviceResponse> = {
         let relay: BehaviorRelay<DeviceResponse> = BehaviorRelay(value: DeviceResponse(devices: []))
         
         devicesSingle
@@ -52,6 +83,33 @@ class DashboardViewModel: ApiClientInjected {
        Observable.never()
     }()
     
+    lazy var userCellArray: Observable<[User]> = {
+        let relay: BehaviorRelay<[User]> = BehaviorRelay(value: [User]())
+        
+        getLevels
+            .withLatestFrom(estimatedGlucoseValues) { ($0, $1) }
+            .map { [weak self] _, values in
+                var userArray: [User] = [User]()
+                guard let value = values.egvs.first else { return [User]() }
+                let timeSinceLastUpdate: String = {
+                    let lastUpdatedDateTime = value.displayTime
+                    let currentDateTime = Date()
+                    let minutes = Calendar.current.dateComponents([.minute], from: lastUpdatedDateTime, to: currentDateTime).minute
+                    return String(format: "%dm ago", minutes ?? "?")
+                }()
+                let glucoseLevel = value.smoothedValue ?? value.realtimeValue
+                let trendArrow: UIImage = self?.getTrendArrow(trend: value.trend ?? "") ?? UIImage()
+                let units = values.unit
+                let user: User = User(value: glucoseLevel, lastUpdated: timeSinceLastUpdate, units: units, trendArrow: trendArrow)
+                userArray.append(user)
+                return userArray
+            }
+            .bind(to: relay)
+            .disposed(by: disposeBag)
+        
+        return relay.asObservable()
+    }()
+    
     lazy var subjectsArray: Observable<[Subject]> = {
         let mockArray: [Subject] = [
             Subject(
@@ -65,7 +123,27 @@ class DashboardViewModel: ApiClientInjected {
                 isActive: false
             )
         ]
-        
+
         return Observable.just(mockArray).asObservable()
     }()
+    
+    // MARK: Internal functions
+    
+    private func getTrendArrow(trend: String) -> UIImage {
+        var image: UIImage = UIImage()
+        switch trend {
+            case Trend.doubleUp.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.singleUp.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.fortyFiveUp.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.flat.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.fortyFiveDown.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.singleDown.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.doubleDown.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.none.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.notComputable.rawValue: image = #imageLiteral(resourceName: "arrow")
+            case Trend.rateOutOfRange.rawValue: image = #imageLiteral(resourceName: "arrow")
+            default: break
+        }
+        return image
+    }
 }

@@ -36,6 +36,14 @@ extension TokenResponse: Codable {
         )
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container: KeyedEncodingContainer<CodingKeys> = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(accessToken, forKey: .accessToken)
+        try container.encode(expiresIn, forKey: .expiresIn)
+        try container.encode(tokenType, forKey: .tokenType)
+        try container.encode(refreshToken, forKey: .refreshToken)
+    }
+    
     static func defaultResponse() -> TokenResponse {
         return TokenResponse(accessToken: "", expiresIn: 0, tokenType: "", refreshToken: "")
     }

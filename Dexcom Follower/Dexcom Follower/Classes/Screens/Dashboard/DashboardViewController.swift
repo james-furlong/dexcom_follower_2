@@ -65,7 +65,7 @@ class DashboardViewController: UIViewController {
 
         // Datasource
         
-        viewModel.subjectsArray
+        viewModel.userCellArray
             .bind(to: tableView.rx.items(cellIdentifier: resuseIdentifier, cellType: cellType)) { _, item, cell in
                 cell.update(with: item)
             }
@@ -121,10 +121,10 @@ class DashboardViewController: UIViewController {
             .bind(to: viewModel.viewDidAppear)
             .disposed(by: disposeBag)
         
-        viewModel.devicesArray
+        viewModel.estimatedGlucoseValues
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { egvs in
                 print("_)")
             })
             .disposed(by: disposeBag)

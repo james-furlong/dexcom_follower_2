@@ -23,6 +23,7 @@
 		1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258B21D9A73200B30497 /* UIViewController+Rx.swift */; };
 		1A2E258E21D9F04A00B30497 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258D21D9F04A00B30497 /* LoadingViewController.swift */; };
 		1A2E259021D9F05600B30497 /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E258F21D9F05600B30497 /* LoadingViewModel.swift */; };
+		1A2E259321DA927F00B30497 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E259221DA927F00B30497 /* User.swift */; };
 		1A3F3ADF2197F0F0002302A1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3ADE2197F0F0002302A1 /* Theme.swift */; };
 		1A3F3AE12197F3FA002302A1 /* Theme+Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */; };
 		1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3F3AE32197F6F0002302A1 /* GradientView.swift */; };
@@ -75,6 +76,7 @@
 		1A2E258B21D9A73200B30497 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		1A2E258D21D9F04A00B30497 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A2E258F21D9F05600B30497 /* LoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
+		1A2E259221DA927F00B30497 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1A3F3ADE2197F0F0002302A1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Dashboard.swift"; sourceTree = "<group>"; };
 		1A3F3AE32197F6F0002302A1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,14 @@
 				1A2E258B21D9A73200B30497 /* UIViewController+Rx.swift */,
 			);
 			path = Rx;
+			sourceTree = "<group>";
+		};
+		1A2E259121DA926800B30497 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E259221DA927F00B30497 /* User.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		1A3F3ADD2197F0DC002302A1 /* Theme */ = {
@@ -392,6 +402,7 @@
 		1AF77B4C2197D77100C50911 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A2E259121DA926800B30497 /* Entities */,
 				1A5D994A21BB99080095E899 /* Network */,
 				1A5D994621BB972E0095E899 /* Extensions */,
 				1A3F3AE22197F6DB002302A1 /* Views */,
@@ -662,6 +673,7 @@
 				1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */,
 				1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */,
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
+				1A2E259321DA927F00B30497 /* User.swift in Sources */,
 				1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */,
 				1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */,
 				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,

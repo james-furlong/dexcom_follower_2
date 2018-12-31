@@ -7,6 +7,7 @@
 //
 
 enum Endpoint {
+    case domain
     case login(String, String)
     case authenticationToken(String)
     case calibrations
@@ -20,6 +21,7 @@ enum Endpoint {
     
     var path: String {
         switch self {
+            case .domain: return "://sandbox-api.dexcom.com"
             case .login(let clientId, let redirctUri): return "v2/oauth2/login?client_id=\(clientId)&redirect_uri=\(redirctUri)&response_type=code&scope=offline_access&state=?"
             case .authenticationToken(let token): return "/v2/oauth2/\(token)"
             case .calibrations: return "/v2/users/self/calibrations"
