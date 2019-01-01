@@ -39,6 +39,7 @@ extension Injector {
                     Injector.Env.httpProtocol = environment.httpProtocol
                     Injector.Env.baseUrl = environment.baseUrl
                     Injector.Env.version = environment.version
+                    Injector.Env.apiClient = environment.apiClient
                 }
             }
         }
@@ -47,6 +48,7 @@ extension Injector {
         static var httpProtocol: String = defaultEnvironment.httpProtocol
         static var baseUrl: String = defaultEnvironment.baseUrl
         static var version: String = defaultEnvironment.version
+        static var apiClient: ApiClientType = defaultEnvironment.apiClient
     }
 }
 

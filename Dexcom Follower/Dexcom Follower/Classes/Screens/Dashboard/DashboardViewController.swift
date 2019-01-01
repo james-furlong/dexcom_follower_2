@@ -65,13 +65,24 @@ class DashboardViewController: UIViewController {
 
         // Datasource
         
-        viewModel.subjectsArray
+        viewModel.userCellArray
             .bind(to: tableView.rx.items(cellIdentifier: resuseIdentifier, cellType: cellType)) { _, item, cell in
                 cell.update(with: item)
             }
             .disposed(by: disposeBag)
         
         return tableView
+    }()
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.style = .whiteLarge
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.color = .black
+        indicator.startAnimating()
+        
+        return indicator
     }()
     
     // MARK: - Lifecycle
@@ -88,6 +99,11 @@ class DashboardViewController: UIViewController {
         
         setupLayout()
         setupBinding()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        viewModel.viewDidAppear.onNext(())
     }
     
     // MARK: - Layout
@@ -112,6 +128,32 @@ class DashboardViewController: UIViewController {
     // MARK: - Binding
     
     private func setupBinding() {
+        self.rx.viewDidAppear
+            .bind(to: viewModel.viewDidAppear)
+            .disposed(by: disposeBag)
         
+        viewModel.estimatedGlucoseValues
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { egvs in
+                print("_)")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.beginLoadingAnimation
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.loadingIndicator.startAnimating()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.stopLoadingAnimation
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.loadingIndicator.stopAnimating()
+            })
+            .disposed(by: disposeBag)
     }
 }

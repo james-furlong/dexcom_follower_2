@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,35 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoginViewController()
+        let viewController: UIViewController = checkForExisitingToken()
+        window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("url \(url)")
-        print("url host :\(url.host!)")
-        print("url path :\(url.path)")
-        
-        
-        let urlPath : String = url.path
-        guard let urlHost : String = url.host else { return false }
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if(urlHost != "swiftdeveloperblog.com")
-        {
-            print("Host is not correct")
-            return false
+//        OAuthSwift.handle(url: url)
+        let deepLinkClient: DeepLinkClient = DeepLinkClient(app: app, url: url, options: options)
+        let result = deepLinkClient.handleDeepLink()
+        guard result.0 else { return false }
+        var viewController: UIViewController = UIViewController()
+        switch result.1 {
+        case .login:
+            viewController = LoadingViewController()
+        case .error:
+            print("ERROR")
+            // TODO: Insert code for alert to advise of error
         }
-        
-        if(urlPath == "/inner"){
-            // TODO: Segues to the loading screen, and then onto the main dashboard (closure?)
-//            let innerPage: InnerPageViewController = mainStoryboard.instantiateViewController(withIdentifier: "InnerPageViewController") as! InnerPageViewController
-//            self.window?.rootViewController = innerPage
-        } else if (urlPath == "/about"){
-            
-        }
+        self.window?.rootViewController = viewController
         self.window?.makeKeyAndVisible()
         return true
     }
@@ -72,6 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    // MARK: Custom functions
+    
+    func checkForExisitingToken() -> UIViewController {
+        guard let _ = KeychainWrapper.shared[KeychainWrapper.authenticationToken] else {
+            return LoginViewController()
+        }
+        return DashboardViewController()
+    }
 
 }
 
