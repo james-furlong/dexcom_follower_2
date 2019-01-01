@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoginViewController()
+        let viewController: UIViewController = checkForExisitingToken()
+        window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         
         return true
@@ -64,6 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    // MARK: Custom functions
+    
+    func checkForExisitingToken() -> UIViewController {
+        guard let _ = KeychainWrapper.shared[KeychainWrapper.authenticationToken] else {
+            return LoginViewController()
+        }
+        return DashboardViewController()
+    }
 
 }
 
