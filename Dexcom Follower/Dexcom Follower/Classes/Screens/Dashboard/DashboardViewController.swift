@@ -71,6 +71,10 @@ class DashboardViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        tableView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+        
         return tableView
     }()
     
@@ -153,6 +157,15 @@ class DashboardViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.loadingIndicator.stopAnimating()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.viewUserDetail
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] egvs, user in
+                let viewController: UIViewController = DeviceHomeViewController()
+                self?.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
     }

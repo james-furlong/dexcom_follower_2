@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0455A58BBD6AE86E8D13F93C /* Pods_Dexcom_FollowerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9A3FC6F45014C7CA2C72E3 /* Pods_Dexcom_FollowerTests.framework */; };
+		1A1E162F21DDB7F400885064 /* UIImage+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E162E21DDB7F400885064 /* UIImage+Utilities.swift */; };
 		1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256B21D5A14F00B30497 /* URL+extensions.swift */; };
 		1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256E21D5A6A400B30497 /* TokenResponse.swift */; };
 		1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */; };
@@ -41,6 +42,9 @@
 		1AABB7B721BC9A0100C18E2D /* Theme+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */; };
 		1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */; };
 		1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */; };
+		1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */; };
+		1AF2317B21DC227B00488E61 /* DeviceHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */; };
+		1AF2317D21DC238100488E61 /* Theme+DeviceHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */; };
 		1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF77B2A2197AD4000C50911 /* AppDelegate.swift */; };
 		1AF77B322197AD4200C50911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF77B312197AD4200C50911 /* Assets.xcassets */; };
 		1AF77B352197AD4200C50911 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF77B332197AD4200C50911 /* LaunchScreen.storyboard */; };
@@ -61,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A1E162E21DDB7F400885064 /* UIImage+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utilities.swift"; sourceTree = "<group>"; };
 		1A2E256B21D5A14F00B30497 /* URL+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extensions.swift"; sourceTree = "<group>"; };
 		1A2E256E21D5A6A400B30497 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -94,6 +99,9 @@
 		1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Login.swift"; sourceTree = "<group>"; };
 		1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utilities.swift"; sourceTree = "<group>"; };
 		1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewModel.swift; sourceTree = "<group>"; };
+		1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewController.swift; sourceTree = "<group>"; };
+		1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+DeviceHome.swift"; sourceTree = "<group>"; };
 		1AF77B272197AD4000C50911 /* Dexcom Follower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dexcom Follower.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF77B2A2197AD4000C50911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AF77B312197AD4200C50911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -210,6 +218,7 @@
 				1A3F3ADE2197F0F0002302A1 /* Theme.swift */,
 				1A3F3AE02197F3FA002302A1 /* Theme+Dashboard.swift */,
 				1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */,
+				1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -262,6 +271,7 @@
 			children = (
 				1A5D994821BB97530095E899 /* UITableView+Utilities.swift */,
 				1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */,
+				1A1E162E21DDB7F400885064 /* UIImage+Utilities.swift */,
 			);
 			path = UIKIt;
 			sourceTree = "<group>";
@@ -348,6 +358,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		1AF2317721DC21E200488E61 /* Device Home */ = {
+			isa = PBXGroup;
+			children = (
+				1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */,
+				1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */,
+			);
+			path = "Device Home";
+			sourceTree = "<group>";
+		};
 		1AF77B1E2197AD4000C50911 = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +434,7 @@
 		1AF77B4D2197D77700C50911 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				1AF2317721DC21E200488E61 /* Device Home */,
 				1AABB7B121BC995600C18E2D /* Login */,
 				1AF77B4F2197D79B00C50911 /* Dashboard */,
 				1AF77B4E2197D77F00C50911 /* Splash */,
@@ -563,15 +583,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Dexcom Follower-checkManifestLockResult.txt",
 			);
@@ -585,8 +601,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dexcom Follower/Pods-Dexcom Follower-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
@@ -595,10 +609,9 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
@@ -606,6 +619,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -617,15 +631,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Dexcom FollowerTests-checkManifestLockResult.txt",
 			);
@@ -648,6 +658,7 @@
 				1AABB7AD21BC95FE00C18E2D /* Namespace.swift in Sources */,
 				1AABB7A821BC908E00C18E2D /* Environment.swift in Sources */,
 				1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */,
+				1AF2317D21DC238100488E61 /* Theme+DeviceHome.swift in Sources */,
 				1A2E258021D9866E00B30497 /* CalibrationsResponse.swift in Sources */,
 				1A2E258621D98B6700B30497 /* EventsResponse.swift in Sources */,
 				1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */,
@@ -658,6 +669,7 @@
 				1AABB7AB21BC949100C18E2D /* EnvironmentInjected.swift in Sources */,
 				1A5D994E21BB992F0095E899 /* SubjectResponse.swift in Sources */,
 				1A2E257621D5AFE100B30497 /* HTTPHeaders.swift in Sources */,
+				1A1E162F21DDB7F400885064 /* UIImage+Utilities.swift in Sources */,
 				1A2E259021D9F05600B30497 /* LoadingViewModel.swift in Sources */,
 				1A5D994521BB96270095E899 /* ReuseableView.swift in Sources */,
 				1A5D994921BB97530095E899 /* UITableView+Utilities.swift in Sources */,
@@ -666,6 +678,7 @@
 				1AABB7B021BC983500C18E2D /* AppCredentials.swift in Sources */,
 				1A3F3ADF2197F0F0002302A1 /* Theme.swift in Sources */,
 				1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */,
+				1AF2317B21DC227B00488E61 /* DeviceHomeViewController.swift in Sources */,
 				1A5D994121BB8DFC0095E899 /* SubjectTableViewCell.swift in Sources */,
 				1AABB7B521BC997500C18E2D /* LoginViewController.swift in Sources */,
 				1A2E257A21D96D9F00B30497 /* ApiClientInjected.swift in Sources */,
@@ -675,6 +688,7 @@
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
 				1A2E259321DA927F00B30497 /* User.swift in Sources */,
 				1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */,
+				1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */,
 				1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */,
 				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,
 			);

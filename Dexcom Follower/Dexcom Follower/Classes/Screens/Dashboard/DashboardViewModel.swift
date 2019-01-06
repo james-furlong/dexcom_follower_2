@@ -29,6 +29,7 @@ class DashboardViewModel: ApiClientInjected {
     // MARK: - Actions
     
     let viewDidAppear: PublishSubject<Void> = PublishSubject()
+    let cellTapped: PublishSubject<IndexPath> = PublishSubject()
     let getLevels: PublishSubject<Void> = PublishSubject()
     let dataFinishedLoading: PublishSubject<Void> = PublishSubject()
     let dataFailedToLoad: PublishSubject<Void> = PublishSubject()
@@ -110,6 +111,19 @@ class DashboardViewModel: ApiClientInjected {
             .disposed(by: disposeBag)
         
         return relay.asObservable()
+    }()
+    
+    lazy var viewUserDetail: Observable<(EGVS, User)> = {
+        cellTapped
+            .withLatestFrom(estimatedGlucoseValues) { ($0, $1) }
+            .map { indexPath, array -> (EGVS, IndexPath) in
+                (array.egvs[indexPath.row], indexPath)
+            }
+            .withLatestFrom(userCellArray) { ($0.0, $0.1, $1) }
+            .map { egvs, indexPath, userArray -> (EGVS, User) in
+                (egvs, userArray[indexPath.row])
+            }
+            .asObservable()
     }()
     
     lazy var beginLoadingAnimation: Observable<Void> = {
