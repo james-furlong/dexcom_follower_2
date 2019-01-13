@@ -8,6 +8,7 @@ target 'Dexcom Follower' do
   pod 'RxDataSources', '~> 3.1'
   pod 'OAuthSwift', '~> 1.2.0'
   pod 'SwiftCharts', '~> 0.6.3'
+  pod 'Charts', '~> 3.2'
   use_frameworks!
 
   # Pods for Dexcom Follower

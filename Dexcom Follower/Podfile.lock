@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.2.1):
+    - Charts/Core (= 3.2.1)
+  - Charts/Core (3.2.1)
   - Differentiator (3.1.0)
   - OAuthSwift (1.2.2)
   - RxAtomic (4.4.0)
@@ -13,6 +16,7 @@ PODS:
   - SwiftCharts (0.6.3)
 
 DEPENDENCIES:
+  - Charts (~> 3.2)
   - OAuthSwift (~> 1.2.0)
   - RxCocoa (~> 4.4)
   - RxDataSources (~> 3.1)
@@ -21,6 +25,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Charts
     - Differentiator
     - OAuthSwift
     - RxAtomic
@@ -30,6 +35,7 @@ SPEC REPOS:
     - SwiftCharts
 
 SPEC CHECKSUMS:
+  Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
@@ -38,6 +44,6 @@ SPEC CHECKSUMS:
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
 
-PODFILE CHECKSUM: dacf55503e3e8513f124b827ed538f851385c82d
+PODFILE CHECKSUM: e41d7372d62cd0f73ba07b35d2f7cb7d75005df6
 
 COCOAPODS: 1.5.3

@@ -7,7 +7,7 @@
 //
 
 import RxSwift
-import SwiftCharts
+import Charts
 
 class DeviceHomeViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
@@ -176,19 +176,25 @@ class DeviceHomeViewController: UIViewController {
         return view
     }()
     
-    private lazy var egvsChart: LineChart = {
-        let chartConfig = ChartConfigXY(
-            xAxisConfig: ChartAxisConfig(from: 0, to: 24, by: 2),
-            yAxisConfig: ChartAxisConfig(from: 0, to: 22, by: 2)
+    private lazy var chart: LineChartView = {
+        let chart: LineChartView = LineChartView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: self.view.bounds.width,
+            height: 500)
         )
-        let chart: LineChart = LineChart(
-            frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 20, height: 500),
-            chartConfig: chartConfig,
-            xTitle: "Time",
-            yTitle: "Level",
-            line: (chartPoints: [(2.0, 2.0)], color: Theme.Color.deviceHomeMainText)
-        )
-        
+//        chart.backgroundColor = .green
+//        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 9.0, 10.0]
+//        var lineChartEntry: [ChartDataEntry] = [ChartDataEntry]()
+//        for i in 0..<array.count {
+//            let value = ChartDataEntry(x: Double(i), y: array[i])
+//            lineChartEntry.append(value)
+//        }
+//        let line = LineChartDataSet(values: lineChartEntry, label: "BGL")
+//        line.colors = [.blue]
+//        let data = LineChartData()
+//        data.addDataSet(line)
+//        chart.data = data
         
         return chart
     }()
@@ -218,7 +224,7 @@ class DeviceHomeViewController: UIViewController {
         
         view.addSubview(graphView)
         
-        graphView.addSubview(egvsChart.view)
+        graphView.addSubview(chart)
         
         buttonArray = [self.threeHourButton, self.sixHourButton, self.twelveHourButton, self.twentyFourHourButton]
         
@@ -277,7 +283,7 @@ class DeviceHomeViewController: UIViewController {
             graphButtonView.heightAnchor.constraint(equalToConstant: 70),
             graphButtonView.leftAnchor.constraint(equalTo: view.leftAnchor),
             graphButtonView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            graphButtonView.bottomAnchor.constraint(equalTo: egvsChart.view.topAnchor),
+            graphButtonView.bottomAnchor.constraint(equalTo: graphView.topAnchor),
             
             graphHourView.widthAnchor.constraint(equalToConstant: (view.frame.width - 20) / 5),
             graphHourView.heightAnchor.constraint(equalToConstant: 30),
@@ -332,5 +338,21 @@ class DeviceHomeViewController: UIViewController {
             multiplier: multiplier,
             constant: 0
         )
+    }
+    
+    private func updateChart() {
+        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 9.0, 10.0]
+        var lineChartEntry: [ChartDataEntry] = [ChartDataEntry]()
+        for i in 0..<array.count {
+            let value = ChartDataEntry(x: Double(i), y: array[i])
+            lineChartEntry.append(value)
+        }
+        let line = LineChartDataSet(values: lineChartEntry, label: "BGL")
+        line.colors = [.blue]
+        line.circleColors = [.white]
+        line.mode = .linear
+        let data = LineChartData()
+        data.addDataSet(line)
+        chart.data = data
     }
 }
