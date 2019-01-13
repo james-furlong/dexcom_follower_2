@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Dexcom Follower
+
+  Created by James Furlong on 13/1/19.
+  Copyright © 2019 James Furlong. All rights reserved.
+*/
+
+// MARK: - Device Home
+
+"Device.Home.Three.Hour" = "3HR";
+"Device.Home.Six.Hour" = "6HR";
+"Device.Home.Twelve.Hour" = "12HR";
+"Device.Home.Twentyfour.Hour" = "24HR";

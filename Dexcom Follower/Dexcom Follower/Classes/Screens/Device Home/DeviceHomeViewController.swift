@@ -86,11 +86,21 @@ class DeviceHomeViewController: UIViewController {
         return view
     }()
     
-    private let graphButtonLabel: UILabel = {
+    private let graphButtonFrontLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.text = "3HR"
+        
+        return label
+    }()
+    
+    private let graphButtonBackLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.text = ""
+        label.alpha = 0.0
         
         return label
     }()
@@ -203,7 +213,8 @@ class DeviceHomeViewController: UIViewController {
         graphButtonView.addSubview(twentyFourHourButton)
         graphButtonView.addSubview(graphHourView)
         
-        graphHourView.addSubview(graphButtonLabel)
+        graphHourView.addSubview(graphButtonBackLabel)
+        graphHourView.addSubview(graphButtonFrontLabel)
         
         view.addSubview(graphView)
         
@@ -237,15 +248,22 @@ class DeviceHomeViewController: UIViewController {
                     }
                 }()
                 graphViewCenterXConstraint.constant = center
-                UIView.animate(
-                    withDuration: 3.0,
-                    delay: 0.0,
-                    options: .curveEaseInOut,
-                    animations: {
-                        self?.view.setNeedsLayout()
-                        self?.view.layoutIfNeeded()
-                },
-                    completion: nil
+                let newLabel: String = {
+                    switch filter {
+                        case 3: return "Device.Home.Three.Hour".localized
+                        case 6: return "Device.Home.Six.Hour".localized
+                        case 12: return "Device.Home.Twelve.Hour".localized
+                        default: return "Device.Home.Twentyfour.Hour".localized
+                    }
+                }()
+                UIView.transition(with: self?.graphButtonFrontLabel ?? UIView(),
+                                  duration: 0.6,
+                                  options: .transitionCrossDissolve,
+                                  animations: { [weak self] in
+                                    self?.graphButtonFrontLabel.text = newLabel
+                                    self?.view.setNeedsLayout()
+                                    self?.view.layoutIfNeeded()
+                                  }, completion: nil
                 )
             })
             .disposed(by: disposeBag)
@@ -265,8 +283,10 @@ class DeviceHomeViewController: UIViewController {
             graphHourView.heightAnchor.constraint(equalToConstant: 30),
             graphHourView.centerYAnchor.constraint(equalTo: graphButtonView.centerYAnchor),
             graphViewCenterXConstraint,
-            graphButtonLabel.centerXAnchor.constraint(equalTo: graphHourView.centerXAnchor),
-            graphButtonLabel.centerYAnchor.constraint(equalTo: graphHourView.centerYAnchor),
+            graphButtonFrontLabel.centerXAnchor.constraint(equalTo: graphHourView.centerXAnchor),
+            graphButtonFrontLabel.centerYAnchor.constraint(equalTo: graphHourView.centerYAnchor),
+            graphButtonBackLabel.centerXAnchor.constraint(equalTo: graphHourView.centerXAnchor),
+            graphButtonBackLabel.centerYAnchor.constraint(equalTo: graphHourView.centerYAnchor),
             threeHourButton.centerYAnchor.constraint(equalTo: graphButtonView.centerYAnchor),
             sixHourButton.centerYAnchor.constraint(equalTo: graphButtonView.centerYAnchor),
             twelveHourButton.centerYAnchor.constraint(equalTo: graphButtonView.centerYAnchor),
@@ -312,31 +332,5 @@ class DeviceHomeViewController: UIViewController {
             multiplier: multiplier,
             constant: 0
         )
-    }
-    
-    private func changeFilterButtonColor(filter: Int, multiplier: CGFloat) {
-        highlightViewLocation = setEqualSpaceConstraint(item: graphHourView, multiplier: multiplier)
-        DispatchQueue.main.async {
-            UIView.animate(
-                withDuration: 3.0,
-                delay: 0.0,
-                options: .curveEaseInOut,
-                animations: {
-//                    switch filter {
-//                        case 3: self.threeHourButton.setTitleColor(.white, for: .normal)
-//                        case 6: self.sixHourButton.setTitleColor(.white, for: .normal)
-//                        case 12: self.twelveHourButton.setTitleColor(.white, for: .normal)
-//                        default: self .twentyFourHourButton.setTitleColor(.white, for: .normal)
-//                    }
-//                    for button in self.buttonArray where button.tag != filter {
-//                        button.setTitleColor(Theme.Color.deviceHomeMainText, for: .normal)
-//                    }
-//                    self.highlightViewLocation = self.setEqualSpaceConstraint(item: self.graphHourView, multiplier: multiplier)
-                    self.view.layoutSubviews()
-                    self.view.layoutIfNeeded()
-            },
-                completion: nil
-            )
-        }
     }
 }
