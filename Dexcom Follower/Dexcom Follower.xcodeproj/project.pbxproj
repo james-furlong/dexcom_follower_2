@@ -11,6 +11,8 @@
 		1A1E162F21DDB7F400885064 /* UIImage+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E162E21DDB7F400885064 /* UIImage+Utilities.swift */; };
 		1A2DCD5621EB108C0016CD54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A2DCD5521EB108C0016CD54 /* Localizable.strings */; };
 		1A2DCD5921EB13AD0016CD54 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2DCD5821EB13AD0016CD54 /* String+Utilities.swift */; };
+		1A2DCD5D21EB92300016CD54 /* AuthClientInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2DCD5C21EB92300016CD54 /* AuthClientInjected.swift */; };
+		1A2DCD5F21EB94940016CD54 /* NetwrokError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2DCD5E21EB94940016CD54 /* NetwrokError.swift */; };
 		1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256B21D5A14F00B30497 /* URL+extensions.swift */; };
 		1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E256E21D5A6A400B30497 /* TokenResponse.swift */; };
 		1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */; };
@@ -71,6 +73,8 @@
 		1A2DCD5421EB10520016CD54 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1A2DCD5521EB108C0016CD54 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1A2DCD5821EB13AD0016CD54 /* String+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utilities.swift"; sourceTree = "<group>"; };
+		1A2DCD5C21EB92300016CD54 /* AuthClientInjected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClientInjected.swift; sourceTree = "<group>"; };
+		1A2DCD5E21EB94940016CD54 /* NetwrokError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwrokError.swift; sourceTree = "<group>"; };
 		1A2E256B21D5A14F00B30497 /* URL+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extensions.swift"; sourceTree = "<group>"; };
 		1A2E256E21D5A6A400B30497 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		1A2E257121D5AE2C00B30497 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				1AABB7A621BC907E00C18E2D /* Config */,
 				1AABB7A321BC8FD200C18E2D /* Clients */,
 				1A5D994B21BB99130095E899 /* Entities */,
+				1A2DCD5E21EB94940016CD54 /* NetwrokError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 			children = (
 				1AABB7AA21BC949100C18E2D /* EnvironmentInjected.swift */,
 				1A2E257921D96D9F00B30497 /* ApiClientInjected.swift */,
+				1A2DCD5C21EB92300016CD54 /* AuthClientInjected.swift */,
 			);
 			path = Injectors;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				1A2E257421D5AE8A00B30497 /* AuthClient.swift in Sources */,
 				1A2E257821D960AB00B30497 /* DeepLinkClient.swift in Sources */,
 				1AABB7B721BC9A0100C18E2D /* Theme+Login.swift in Sources */,
+				1A2DCD5D21EB92300016CD54 /* AuthClientInjected.swift in Sources */,
 				1AABB7AD21BC95FE00C18E2D /* Namespace.swift in Sources */,
 				1AABB7A821BC908E00C18E2D /* Environment.swift in Sources */,
 				1A2E256C21D5A14F00B30497 /* URL+extensions.swift in Sources */,
@@ -707,6 +714,7 @@
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
 				1A2E259321DA927F00B30497 /* User.swift in Sources */,
 				1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */,
+				1A2DCD5F21EB94940016CD54 /* NetwrokError.swift in Sources */,
 				1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */,
 				1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */,
 				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,
@@ -869,7 +877,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6J46PX2924;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "${SRCROOT}/** ${inherited}";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"${SRCROOT}/**",
+					"${inherited}",
+				);
 				INFOPLIST_FILE = "Dexcom Follower/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -889,7 +900,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6J46PX2924;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "${inherited} ${SRCROOT}/**";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"${inherited}",
+					"${SRCROOT}/**",
+				);
 				INFOPLIST_FILE = "Dexcom Follower/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

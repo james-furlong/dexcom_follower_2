@@ -40,6 +40,7 @@ extension Injector {
                     Injector.Env.baseUrl = environment.baseUrl
                     Injector.Env.version = environment.version
                     Injector.Env.apiClient = environment.apiClient
+                    Injector.Env.authClient = environment.authClient
                 }
             }
         }
@@ -49,6 +50,7 @@ extension Injector {
         static var baseUrl: String = defaultEnvironment.baseUrl
         static var version: String = defaultEnvironment.version
         static var apiClient: ApiClientType = defaultEnvironment.apiClient
+        static var authClient: AuthClientType = defaultEnvironment.authClient
     }
 }
 

@@ -183,18 +183,16 @@ class DeviceHomeViewController: UIViewController {
             width: self.view.bounds.width,
             height: 500)
         )
-//        chart.backgroundColor = .green
-//        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 9.0, 10.0]
-//        var lineChartEntry: [ChartDataEntry] = [ChartDataEntry]()
-//        for i in 0..<array.count {
-//            let value = ChartDataEntry(x: Double(i), y: array[i])
-//            lineChartEntry.append(value)
-//        }
-//        let line = LineChartDataSet(values: lineChartEntry, label: "BGL")
-//        line.colors = [.blue]
-//        let data = LineChartData()
-//        data.addDataSet(line)
-//        chart.data = data
+        
+        viewModel.data
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                chart.data = data
+                chart.data?.notifyDataChanged()
+//                chart.notifyDataSetChanged()
+            })
+            .disposed(by: disposeBag)
         
         return chart
     }()
@@ -230,6 +228,10 @@ class DeviceHomeViewController: UIViewController {
         
         setupLayout()
         setupBinding()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     // MARK: Layout
@@ -323,7 +325,28 @@ class DeviceHomeViewController: UIViewController {
     // MARK: Binding
     
     private func setupBinding() {
+        self.rx.viewDidAppear
+            .bind(to: viewModel.viewDidAppear)
+            .disposed(by: disposeBag)
         
+        viewModel.initialSetup
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                // Start loading animation
+            })
+            .disposed(by: disposeBag)
+        
+//        viewModel.data
+//            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] data in
+//                self?.chart.data = data
+//                self?.chart.lineData?.notifyDataChanged()
+//                self?.chart.data?.notifyDataChanged()
+//                self?.chart.notifyDataSetChanged()
+//            })
+//            .disposed(by: disposeBag)
     }
     
     // MARK: Functions

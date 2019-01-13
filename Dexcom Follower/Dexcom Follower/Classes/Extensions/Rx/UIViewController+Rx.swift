@@ -16,11 +16,11 @@ extension Reactive where Base: UIViewController {
     }
     
     var viewWillAppear: ControlEvent<Void> {
-        return controlEvent(for: #selector(UIViewController.viewWillAppear))
+        return controlEvent(for: #selector(UIViewController.viewDidAppear))
     }
     
     var viewDidAppear: ControlEvent<Void> {
-        return controlEvent(for: #selector(UIViewController.viewWillAppear))
+        return controlEvent(for: #selector(UIViewController.viewDidAppear))
     }
     
     var viewWillDisappear: ControlEvent<Void> {

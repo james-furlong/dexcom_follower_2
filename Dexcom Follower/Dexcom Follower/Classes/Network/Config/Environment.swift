@@ -23,6 +23,7 @@ protocol Environment {
     static var baseUrl: String { get }
     static var version: String { get }
     static var apiClient: ApiClientType { get }
+    static var authClient: AuthClientType { get }
 }
 
 // MARK: - Target
@@ -59,6 +60,7 @@ struct MockEnvironment: Environment {
     static var baseUrl: String = ""
     static var version: String = "1"
     static var apiClient: ApiClientType = Network.ApiClient()
+    static var authClient: AuthClientType = Network.AuthClient()
     
 }
 
@@ -70,6 +72,7 @@ struct StagingEnvironment: Environment {
     static var baseUrl: String = "sandbox-api.dexcom.com"
     static var version: String = "1"
     static var apiClient: ApiClientType = Network.ApiClient()
+    static var authClient: AuthClientType = Network.AuthClient()
 }
 
 struct ProductionEnvironment: Environment {
@@ -80,4 +83,5 @@ struct ProductionEnvironment: Environment {
     static var baseUrl: String = "api.dexcom.com"
     static var version: String = "1"
     static var apiClient: ApiClientType = Network.ApiClient()
+    static var authClient: AuthClientType = Network.AuthClient()
 }
