@@ -6,7 +6,7 @@
 //  Copyright © 2019 James Furlong. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension String {
     public var normalized: String {
@@ -49,6 +49,12 @@ public extension String {
     
     var containsWhitespace: Bool {
         return(self.rangeOfCharacter(from: .whitespacesAndNewlines) != nil)
+    }
+}
+
+extension String {
+    func size(withSystemFontSize pointSize: CGFloat) -> CGSize {
+        return (self as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: pointSize)])
     }
 }
 
