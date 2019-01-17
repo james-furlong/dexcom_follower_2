@@ -16,27 +16,6 @@ class DashboardViewController: UIViewController {
     
     // MARK: - UI
     
-    private lazy var  topView: GradientView = {
-        let view: GradientView = GradientView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.colors = [
-            Theme.Color.dashboardNavBarTopColor,
-            Theme.Color.dashboardNavBarBottomColor
-        ]
-        
-        return view
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = Theme.Color.dashboardNavBarTextColor
-        label.font = Theme.Font.dashboardNavBarTitleFont
-        label.text = "Dexcom"
-        
-        return label
-    }()
-    
     private lazy var editButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -93,11 +72,9 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Dexcom"
         view.backgroundColor = .white
 
-        view.addSubview(topView)
-        view.addSubview(titleLabel)
         view.addSubview(editButton)
         view.addSubview(tableView)
         
@@ -114,15 +91,7 @@ class DashboardViewController: UIViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            topView.heightAnchor.constraint(equalToConstant: 120),
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: topView.bottomAnchor, constant: -20),
-            editButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            editButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            tableView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

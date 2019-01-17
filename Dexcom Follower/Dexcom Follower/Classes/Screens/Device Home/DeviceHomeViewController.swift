@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import Charts
 
 class DeviceHomeViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
@@ -176,23 +175,19 @@ class DeviceHomeViewController: UIViewController {
         return view
     }()
     
-    private lazy var chart: LineChartView = {
-        let chart: LineChartView = LineChartView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: self.view.bounds.width,
-            height: 500)
+    private lazy var chart: LineGraphView = {
+        let chart: LineGraphView = LineGraphView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: self.view.bounds.width - 40,
+                height: 500
+            )
         )
-        
-        viewModel.data
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] data in
-                chart.data = data
-                chart.data?.notifyDataChanged()
-//                chart.notifyDataSetChanged()
-            })
-            .disposed(by: disposeBag)
+        chart.backgroundColor = .clear
+        chart.translatesAutoresizingMaskIntoConstraints = false
+        chart.data = [CGPoint(x: 1.0, y: 2.0), CGPoint(x: 2.0, y: 6.0), CGPoint(x: 2.5, y: 8.0), CGPoint(x: 3.0, y: 6.0), CGPoint(x: 4.0, y: 2.0)]
+        chart.colors = [.blue, .green]
         
         return chart
     }()
@@ -278,9 +273,9 @@ class DeviceHomeViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             graphView.heightAnchor.constraint(equalToConstant: 500),
-            graphView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            graphView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            graphView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            graphView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            graphView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            graphView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             graphButtonView.heightAnchor.constraint(equalToConstant: 70),
             graphButtonView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -364,18 +359,18 @@ class DeviceHomeViewController: UIViewController {
     }
     
     private func updateChart() {
-        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 9.0, 10.0]
-        var lineChartEntry: [ChartDataEntry] = [ChartDataEntry]()
-        for i in 0..<array.count {
-            let value = ChartDataEntry(x: Double(i), y: array[i])
-            lineChartEntry.append(value)
-        }
-        let line = LineChartDataSet(values: lineChartEntry, label: "BGL")
-        line.colors = [.blue]
-        line.circleColors = [.white]
-        line.mode = .linear
-        let data = LineChartData()
-        data.addDataSet(line)
-        chart.data = data
+//        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 9.0, 10.0]
+//        var lineChartEntry: [ChartDataEntry] = [ChartDataEntry]()
+//        for i in 0..<array.count {
+//            let value = ChartDataEntry(x: Double(i), y: array[i])
+//            lineChartEntry.append(value)
+//        }
+//        let line = LineChartDataSet(values: lineChartEntry, label: "BGL")
+//        line.colors = [.blue]
+//        line.circleColors = [.white]
+//        line.mode = .linear
+//        let data = LineChartData()
+//        data.addDataSet(line)
+//        chart.data = data
     }
 }

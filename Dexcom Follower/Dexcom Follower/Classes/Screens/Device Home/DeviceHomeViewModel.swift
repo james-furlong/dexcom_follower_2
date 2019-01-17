@@ -54,15 +54,15 @@ class DeviceHomeViewModel: ApiClientInjected, AuthClientInjected {
         return relay.asObservable()
     }()
     
-    lazy var data: Observable<LineChartData> = {
-        let relay: BehaviorRelay<LineChartData> = BehaviorRelay(value: LineChartData())
+    lazy var data: Observable<[CGPoint]> = {
+        let relay: BehaviorRelay<[CGPoint]> = BehaviorRelay(value: [CGPoint]())
         
         retrieveData
             .withLatestFrom(authClient.accessToken())
             .subscribe(onNext: { [weak self] token in
                 self?.apiClient.getEgvs(token: token, complete: { response in
                     let data = self?.convertIntoData(from: response)
-                    relay.accept(data ?? LineChartData())
+                    relay.accept(data ?? [CGPoint]())
                 })
             })
             .disposed(by: disposeBag)
@@ -84,18 +84,14 @@ class DeviceHomeViewModel: ApiClientInjected, AuthClientInjected {
     
     // MARK: Internal functions
     
-    private func convertIntoData(from response: EgvResponse) -> LineChartData {
-        var dataArray: [ChartDataEntry] = [ChartDataEntry]()
-        for value in response.egvs {
-            let time = getDisplayTime(for: value.displayTime)
-            let value = ChartDataEntry(x: time, y: Double(value.value))
-            dataArray.append(value)
+    private func convertIntoData(from response: EgvResponse) -> [CGPoint] {
+        var data: [CGPoint] = [CGPoint]()
+        
+        for event in response.egvs {
+            let tmp: CGPoint = CGPoint(x: getDisplayTime(for: event.displayTime), y: Double(event.value))
+            data.append(tmp)
         }
-        let line: LineChartDataSet = LineChartDataSet(values: dataArray, label: "BGL")
-        line.colors = [.blue]
-        line.drawCirclesEnabled = false
-        let data: LineChartData = LineChartData()
-        data.addDataSet(line)
+        
         return data
     }
         

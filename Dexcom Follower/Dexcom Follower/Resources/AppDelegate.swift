@@ -24,6 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
+        navController.navigationBar.tintColor = Theme.Color.deviceHomeMainText
+        navController.navigationBar.barTintColor = Theme.Color.deviceHomeNavBarTopColor
+        navController.navigationBar.titleTextAttributes = [
+            .font: Theme.Font.deviceHomeNavBarTitleFont,
+        ]
+        
         return true
     }
     

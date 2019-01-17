@@ -40,9 +40,9 @@ class LineChart: UIView {
     var showInnerLines: Bool = true
     var labelFontSize: CGFloat = 10.0
     var axisLineWidth: CGFloat = 1.0
-    var deltaX: CGFloat = 10.0
+    var deltaX: CGFloat = 1.0
     var deltaY: CGFloat = 10.0
-    var xMax: CGFloat = 100.0
+    var xMax: CGFloat = 24.0
     var yMax: CGFloat = 100.0
     var xMin: CGFloat = 0.0
     var yMin: CGFloat = 0.0
@@ -230,4 +230,17 @@ class LineChart: UIView {
         
         return path
     }
+    
+    func drawCurvedChart() {
+        guard let dataPoints = data, dataPoints.count > 0 else { return }
+        
+        if let path = CurveAlgorithm.shared.createCurvedPath(dataPoints: dataPoints) {
+            let line = CAShapeLayer()
+            line.path = path.cgPath
+            line.strokeColor = UIColor.white.cgColor
+            line.fillColor = UIColor.clear.cgColor
+            self.lineLayer.addSublayer(line)
+        }
+    }
 }
+

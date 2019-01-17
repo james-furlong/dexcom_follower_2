@@ -46,6 +46,10 @@
 		1AABB7B721BC9A0100C18E2D /* Theme+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */; };
 		1AABB7B921BC9BA800C18E2D /* UIColor+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */; };
 		1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */; };
+		1AD0C3E021EE6A2F00EFDC9A /* CGPoint+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0C3DF21EE6A2F00EFDC9A /* CGPoint+Utilities.swift */; };
+		1AD0C3E221EE6A9000EFDC9A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0C3E121EE6A9000EFDC9A /* LineChart.swift */; };
+		1AF0F82921F10EAB0013D8C4 /* CurvedLineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F82821F10EAB0013D8C4 /* CurvedLineGraph.swift */; };
+		1AF0F82B21F1141F0013D8C4 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */; };
 		1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */; };
 		1AF2317B21DC227B00488E61 /* DeviceHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */; };
 		1AF2317D21DC238100488E61 /* Theme+DeviceHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */; };
@@ -55,6 +59,7 @@
 		1AF77B402197AD4200C50911 /* Dexcom_FollowerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF77B3F2197AD4200C50911 /* Dexcom_FollowerTests.swift */; };
 		1AF77B512197D7C700C50911 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF77B502197D7C700C50911 /* DashboardViewController.swift */; };
 		1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF77B522197D7D800C50911 /* DashboardViewModel.swift */; };
+		1AF82B3D21EFC31700E85B51 /* CurveAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF82B3C21EFC31700E85B51 /* CurveAlgorithm.swift */; };
 		B2E501F35FC90A8566F34D0F /* Pods_Dexcom_Follower.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408D33D8CDEA0CCE7BDA6A26 /* Pods_Dexcom_Follower.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +113,10 @@
 		1AABB7B621BC9A0100C18E2D /* Theme+Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Login.swift"; sourceTree = "<group>"; };
 		1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utilities.swift"; sourceTree = "<group>"; };
 		1AABB7BA21BCACAD00C18E2D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1AD0C3DF21EE6A2F00EFDC9A /* CGPoint+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Utilities.swift"; sourceTree = "<group>"; };
+		1AD0C3E121EE6A9000EFDC9A /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		1AF0F82821F10EAB0013D8C4 /* CurvedLineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedLineGraph.swift; sourceTree = "<group>"; };
+		1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewModel.swift; sourceTree = "<group>"; };
 		1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewController.swift; sourceTree = "<group>"; };
 		1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+DeviceHome.swift"; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		1AF77B412197AD4200C50911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AF77B502197D7C700C50911 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		1AF77B522197D7D800C50911 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		1AF82B3C21EFC31700E85B51 /* CurveAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveAlgorithm.swift; sourceTree = "<group>"; };
 		30BB283712F884C7E22A82AC /* Pods-Dexcom Follower.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dexcom Follower.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dexcom Follower/Pods-Dexcom Follower.release.xcconfig"; sourceTree = "<group>"; };
 		408D33D8CDEA0CCE7BDA6A26 /* Pods_Dexcom_Follower.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dexcom_Follower.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D32E74C32B822D347644DE /* Pods-Dexcom FollowerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dexcom FollowerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dexcom FollowerTests/Pods-Dexcom FollowerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,6 +235,9 @@
 			isa = PBXGroup;
 			children = (
 				1A2E259221DA927F00B30497 /* User.swift */,
+				1AD0C3E121EE6A9000EFDC9A /* LineChart.swift */,
+				1AF82B3C21EFC31700E85B51 /* CurveAlgorithm.swift */,
+				1AF0F82821F10EAB0013D8C4 /* CurvedLineGraph.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -244,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3F3AE32197F6F0002302A1 /* GradientView.swift */,
+				1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,6 +304,7 @@
 				1A5D994821BB97530095E899 /* UITableView+Utilities.swift */,
 				1AABB7B821BC9BA800C18E2D /* UIColor+Utilities.swift */,
 				1A1E162E21DDB7F400885064 /* UIImage+Utilities.swift */,
+				1AD0C3DF21EE6A2F00EFDC9A /* CGPoint+Utilities.swift */,
 			);
 			path = UIKIt;
 			sourceTree = "<group>";
@@ -700,9 +715,11 @@
 				1A5D994521BB96270095E899 /* ReuseableView.swift in Sources */,
 				1A5D994921BB97530095E899 /* UITableView+Utilities.swift in Sources */,
 				1A2E258E21D9F04A00B30497 /* LoadingViewController.swift in Sources */,
+				1AD0C3E021EE6A2F00EFDC9A /* CGPoint+Utilities.swift in Sources */,
 				1AF77B512197D7C700C50911 /* DashboardViewController.swift in Sources */,
 				1AABB7B021BC983500C18E2D /* AppCredentials.swift in Sources */,
 				1A3F3ADF2197F0F0002302A1 /* Theme.swift in Sources */,
+				1AD0C3E221EE6A9000EFDC9A /* LineChart.swift in Sources */,
 				1AABB7BB21BCACAD00C18E2D /* Endpoint.swift in Sources */,
 				1AF2317B21DC227B00488E61 /* DeviceHomeViewController.swift in Sources */,
 				1A5D994121BB8DFC0095E899 /* SubjectTableViewCell.swift in Sources */,
@@ -711,9 +728,12 @@
 				1A3F3AE42197F6F0002302A1 /* GradientView.swift in Sources */,
 				1AF77B2B2197AD4000C50911 /* AppDelegate.swift in Sources */,
 				1A2E257221D5AE2C00B30497 /* KeychainWrapper.swift in Sources */,
+				1AF0F82921F10EAB0013D8C4 /* CurvedLineGraph.swift in Sources */,
+				1AF0F82B21F1141F0013D8C4 /* LineGraphView.swift in Sources */,
 				1AF77B532197D7D800C50911 /* DashboardViewModel.swift in Sources */,
 				1A2E259321DA927F00B30497 /* User.swift in Sources */,
 				1A2E257D21D97E3F00B30497 /* DevicesResponse.swift in Sources */,
+				1AF82B3D21EFC31700E85B51 /* CurveAlgorithm.swift in Sources */,
 				1A2DCD5F21EB94940016CD54 /* NetwrokError.swift in Sources */,
 				1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */,
 				1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */,
