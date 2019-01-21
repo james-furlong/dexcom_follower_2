@@ -121,21 +121,27 @@ class LineGraphView: UIView {
         clippingPath.addClip()
         
         // Gradient for clipped area
-        let graphStartPoint = CGPoint(x: margin, y: 0)
-        let graphEndPoint = CGPoint(x: margin, y: bounds.height)
+//        let graphStartPoint = CGPoint(x: margin, y: 0)
+//        let graphEndPoint = CGPoint(x: margin, y: bounds.height)
+//
+//        let newCfColors = [colors[1], colors[0]].map { $0.cgColor } as CFArray
+//         guard let newGradient = CGGradient(
+//            colorsSpace: colorSpace,
+//            colors: newCfColors,
+//            locations: colorLocations
+//            ) else { return }
+//
+//        context.fil
+//
+//        context.drawLinearGradient(newGradient,
+//                                   start: graphStartPoint,
+//                                   end: graphEndPoint,
+//                                   options: []
+//        )
         
-        let newCfColors = [colors[1], colors[0]].map { $0.cgColor } as CFArray
-         guard let newGradient = CGGradient(
-            colorsSpace: colorSpace,
-            colors: newCfColors,
-            locations: colorLocations
-            ) else { return }
-        
-        context.drawLinearGradient(newGradient,
-                                   start: graphStartPoint,
-                                   end: graphEndPoint,
-                                   options: []
-        )
+        UIColor.red.setFill()
+        let rectPath = UIBezierPath(rect: rect)
+        rectPath.fill()
         context.restoreGState()
         
         let trans = setTransform(minX: self.minX, maxX: self.maxX, minY: self.minY, maxY: self.maxY)

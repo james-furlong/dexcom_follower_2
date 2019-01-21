@@ -50,7 +50,6 @@
 		1AD0C3E221EE6A9000EFDC9A /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0C3E121EE6A9000EFDC9A /* LineChart.swift */; };
 		1AF0F82921F10EAB0013D8C4 /* CurvedLineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F82821F10EAB0013D8C4 /* CurvedLineGraph.swift */; };
 		1AF0F82B21F1141F0013D8C4 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */; };
-		1AF0F82D21F323150013D8C4 /* GraphAxisLabelsY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F82C21F323150013D8C4 /* GraphAxisLabelsY.swift */; };
 		1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */; };
 		1AF2317B21DC227B00488E61 /* DeviceHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */; };
 		1AF2317D21DC238100488E61 /* Theme+DeviceHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */; };
@@ -118,7 +117,6 @@
 		1AD0C3E121EE6A9000EFDC9A /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		1AF0F82821F10EAB0013D8C4 /* CurvedLineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedLineGraph.swift; sourceTree = "<group>"; };
 		1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
-		1AF0F82C21F323150013D8C4 /* GraphAxisLabelsY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelsY.swift; sourceTree = "<group>"; };
 		1AF2317821DC221000488E61 /* DeviceHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewModel.swift; sourceTree = "<group>"; };
 		1AF2317A21DC227B00488E61 /* DeviceHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHomeViewController.swift; sourceTree = "<group>"; };
 		1AF2317C21DC238100488E61 /* Theme+DeviceHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+DeviceHome.swift"; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 			children = (
 				1A3F3AE32197F6F0002302A1 /* GradientView.swift */,
 				1AF0F82A21F1141F0013D8C4 /* LineGraphView.swift */,
-				1AF0F82C21F323150013D8C4 /* GraphAxisLabelsY.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -740,7 +737,6 @@
 				1A2DCD5F21EB94940016CD54 /* NetwrokError.swift in Sources */,
 				1AF2317921DC221000488E61 /* DeviceHomeViewModel.swift in Sources */,
 				1A2E258C21D9A73200B30497 /* UIViewController+Rx.swift in Sources */,
-				1AF0F82D21F323150013D8C4 /* GraphAxisLabelsY.swift in Sources */,
 				1A2E256F21D5A6A400B30497 /* TokenResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

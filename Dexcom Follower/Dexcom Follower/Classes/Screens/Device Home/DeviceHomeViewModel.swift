@@ -19,10 +19,11 @@ class DeviceHomeViewModel: ApiClientInjected, AuthClientInjected {
     let viewDidAppear: PublishSubject<Void> = PublishSubject()
     let retrieveData: PublishSubject<Void> = PublishSubject()
     let filterButtonTapped: PublishSubject<Int> = PublishSubject()
-    let threeHourButtonTapped: PublishSubject<Void> = PublishSubject()
-    let sixHourButtonTapped: PublishSubject<Void> = PublishSubject()
-    let twelveHourButtonTapped: PublishSubject<Void> = PublishSubject()
-    let twentyFourHourButtonTapped: PublishSubject<Void> = PublishSubject()
+    let updateData: PublishSubject<Void> = PublishSubject()
+//    let threeHourButtonTapped: PublishSubject<Void> = PublishSubject()
+//    let sixHourButtonTapped: PublishSubject<Void> = PublishSubject()
+//    let twelveHourButtonTapped: PublishSubject<Void> = PublishSubject()
+//    let twentyFourHourButtonTapped: PublishSubject<Void> = PublishSubject()
     
     // MARK: Observables
     
@@ -48,7 +49,10 @@ class DeviceHomeViewModel: ApiClientInjected, AuthClientInjected {
         
         filterButtonTapped
             .throttle(0.250, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
-            .bind(to: relay)
+            .subscribe(onNext: { [weak self] filter in
+                relay.accept(filter)
+                self?.updateData.onNext(())
+            })
             .disposed(by: disposeBag)
         
         return relay.asObservable()
@@ -58,7 +62,8 @@ class DeviceHomeViewModel: ApiClientInjected, AuthClientInjected {
         let relay: BehaviorRelay<[CGPoint]> = BehaviorRelay(value: [CGPoint]())
         var filter: Int = 3
         
-        retrieveData
+        Observable
+            .merge(retrieveData, updateData)
             .withLatestFrom(authClient.accessToken())
             .subscribe(onNext: { [weak self] token in
                 self?.apiClient.getEgvs(token: token, complete: { response in
