@@ -11,7 +11,7 @@ import Foundation
 struct EgvResponse: Hashable {
     let unit: String
     let rateUnit: String
-    let egvs: [EGVS]
+    var egvs: [EGVS]
 }
 
 struct EGVS: Hashable, Equatable {

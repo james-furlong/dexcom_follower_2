@@ -12,3 +12,17 @@
 "Device.Home.Six.Hour" = "6HR";
 "Device.Home.Twelve.Hour" = "12HR";
 "Device.Home.Twentyfour.Hour" = "24HR";
+
+// MARK: - Graph
+
+"Graph.Y.Label.One.Mml" = "2";
+"Graph.Y.Label.Two.Mml" = "4";
+"Graph.Y.Label.Three.Mml" = "6";
+"Graph.Y.Label.Four.Mml" = "8";
+"Graph.Y.Label.Five.Mml" = "10";
+"Graph.Y.Label.Six.Mml" = "12";
+"Graph.Y.Label.Seven.Mml" = "14";
+"Graph.Y.Label.Eight.Mml" = "16";
+"Graph.Y.Label.Nine.Mml" = "18";
+"Graph.Y.Label.Ten.Mml" = "20";
+"Graph.Y.Label.Eleven.Mml" = "22";

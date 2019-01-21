@@ -18,6 +18,9 @@ extension Theme.Color {
     static let deviceHomeFooterBarBackgroundColor: UIColor = .pickledBluewood
     static let deviceHomeFooterTextColor: UIColor = .halfBaked
     static let deviceHomeImageBackground: UIColor = .pickledBluewood
+    
+    // Graph
+    static let deviceHomeGraphLabel = UIColor.pickledBluewood.withAlphaComponent(0.60)
 }
 
 extension Theme.Font {
@@ -29,4 +32,7 @@ extension Theme.Font {
     static let deviceHomeCellError: UIFont = .systemFont(ofSize: 24)
     static let deviceHomeCellUnits: UIFont = .systemFont(ofSize: 10)
     static let deviceHomeCellMeasurement: UIFont = .systemFont(ofSize: 26)
+    
+    // Graph
+    static let deviceHomeGraphLabel: UIFont = .systemFont(ofSize: 8)
 }

@@ -16,7 +16,7 @@ class LineGraphView: UIView {
     
     private struct Constants {
         static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
-        static let margin: CGFloat = 20.0
+        static let margin: CGFloat = -2.0
         static let topBorder: CGFloat = 60
         static let bottomBorder: CGFloat = 50
         static let colorAlpha: CGFloat = 0.3
@@ -30,16 +30,21 @@ class LineGraphView: UIView {
     var axisColor: UIColor = .white
     let axisLineWidth: CGFloat = 1.0
     let deltaX: CGFloat = 1.0
-    let deltaY: CGFloat = 2.0
+    let deltaY: CGFloat = 40.0
     var minX: CGFloat = 0.0
     var minY: CGFloat = 0.0
-    var maxX: CGFloat = 24.0
-    var maxY: CGFloat = 22.0
+    var maxX: CGFloat = 3.0
+    var maxY: CGFloat = 400.0
     
     override func draw(_ rect: CGRect) {
         let height = rect.height
         let width = rect.width
         
+        guard !data.isEmpty else { return }
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        let transform = setTransform(minX: minX, maxX: maxX, minY: minY, maxY: maxY)
+        drawAxis(in: context, usingTransform: transform)
+
         // Clipping path for graph border
         let path = UIBezierPath(roundedRect: rect,
                                 byRoundingCorners: .allCorners,
@@ -47,7 +52,6 @@ class LineGraphView: UIView {
         path.addClip()
         
         // Draw the gradient background
-        guard let context = UIGraphicsGetCurrentContext() else { return }
         let cfColors = colors.map { $0.cgColor } as CFArray
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let colorLocations: [CGFloat] = [0.0, 1.0]
@@ -71,7 +75,8 @@ class LineGraphView: UIView {
         
         let columnXPoint = { (column: Int) -> CGFloat in
             let spacing = graphWidth / CGFloat(self.data.count - 1)
-            return CGFloat(column) * spacing + margin + 2
+            let result = CGFloat(column) * spacing + margin + 2
+            return result
         }
 
         let topBorder = Constants.topBorder
@@ -81,7 +86,8 @@ class LineGraphView: UIView {
         
         let columnYPoint = { (graphPoint: CGFloat) -> CGFloat in
             let y = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
-            return graphHeight + topBorder - y // Flip the graph
+            let result = graphHeight + topBorder - y // Flip the graph
+            return result
         }
 
         UIColor.white.setFill()
@@ -115,42 +121,28 @@ class LineGraphView: UIView {
         clippingPath.addClip()
         
         // Gradient for clipped area
-        let graphStartPoint = CGPoint(x: margin, y: bounds.height / 2)
+        let graphStartPoint = CGPoint(x: margin, y: 0)
         let graphEndPoint = CGPoint(x: margin, y: bounds.height)
         
-        context.drawLinearGradient(gradientDraw,
+        let newCfColors = [colors[1], colors[0]].map { $0.cgColor } as CFArray
+         guard let newGradient = CGGradient(
+            colorsSpace: colorSpace,
+            colors: newCfColors,
+            locations: colorLocations
+            ) else { return }
+        
+        context.drawLinearGradient(newGradient,
                                    start: graphStartPoint,
                                    end: graphEndPoint,
                                    options: []
         )
         context.restoreGState()
         
-        // Draw the circles on top of the graph stroke
-        for i in 0..<data.count {
-            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(data[i].y))
-            point.x -= Constants.circleDiameter / 2
-            point.y -= Constants.circleDiameter / 2
-            
-            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
-            circle.fill()
-        }
-        
-        // Draw horizontal graph lines on the top of everything
-        for i in 1...11 {
-            let multi = Double(i) / 11.0
-            let movePoint = CGPoint(x: margin, y: (height * CGFloat(multi)))
-            let linePoint = CGPoint(x: width - margin, y: (height * CGFloat(multi)))
-            graphPath.move(to: movePoint)
-            graphPath.addLine(to: linePoint)
-        }
-
-        let color = UIColor(white: 1.0, alpha: Constants.colorAlpha)
-        color.setStroke()
-        
-//        let trans = setTransform(minX: self.minX, maxX: self.maxX, minY: self.minY, maxY: self.maxY)
-//        setNeedsDisplay()
-//        drawAxis(in: context, usingTransform: trans)
+        let trans = setTransform(minX: self.minX, maxX: self.maxX, minY: self.minY, maxY: self.maxY)
+        drawAxis(in: context, usingTransform: trans)
     }
+    
+    // MARK: - UI
     
     private func midPoint(for points: (CGPoint, CGPoint)) -> CGPoint {
         return CGPoint(x: (points.0.x + points.1.x) / 2 , y: (points.0.y + points.1.y) / 2)
@@ -171,10 +163,10 @@ class LineGraphView: UIView {
     func setTransform(minX: CGFloat, maxX: CGFloat, minY: CGFloat, maxY: CGFloat) -> CGAffineTransform {
         let xLabelSize = "\(Int(maxX))".size(withSystemFontSize: labelFontSize)
         let yLabelSize = "\(Int(maxY))".size(withSystemFontSize: labelFontSize)
-        let xOffset = xLabelSize.height + 2
-        let yOffset = yLabelSize.height + 5
+        let xOffset = xLabelSize.height + 5
+        let yOffset = yLabelSize.height + 10
         let xScale = (bounds.width - yOffset - xLabelSize.width/2 - 2)/(maxX - minY)
-        let yScale = (bounds.width - xOffset - yLabelSize.width/2 - 2)/(maxX - minY)
+        let yScale = (bounds.height - xOffset - yLabelSize.height/2 - 2)/(maxY - minX)
         
         let chartTransform = CGAffineTransform(
             a: xScale,
@@ -189,51 +181,33 @@ class LineGraphView: UIView {
     }
     
     func drawAxis(in context: CGContext, usingTransform trans: CGAffineTransform) {
-        
-        
         let thickerLines: CGMutablePath = CGMutablePath()
-        let thinnerLines: CGMutablePath = CGMutablePath()
-        let xAxisPoints = [CGPoint(x: self.minX, y: 0), CGPoint(x: self.maxX, y: 0)]
-        let yAxisPoints = [CGPoint(x: 0, y: self.minY), CGPoint(x: 0, y: self.maxY)]
+        let xAxisPoints = [CGPoint(x: self.minX, y: self.minY), CGPoint(x: self.maxX, y: self.minY)]
         thickerLines.addLines(between: xAxisPoints, transform: trans)
-        thinnerLines.addLines(between: yAxisPoints, transform: trans)
+        
         for x in stride(from: self.minX, through: self.maxX, by: deltaX) {
-            let tickPoints = showInnerLines ?
-                [CGPoint(x: x, y: self.minY).applying(trans), CGPoint(x: x, y: self.maxY).applying(trans)] :
-                [CGPoint(x: x, y: 0).applying(trans), CGPoint(x: x, y: 0).applying(trans).adding(y: -5)]
-            thinnerLines.addLines(between: tickPoints)
-            
-            if x != self.minX {
-                let label = "\(Int(x))" as NSString
-                let labelSize = "\(Int(x))".size(withSystemFontSize: labelFontSize)
-                let labelDrawPoint = CGPoint(x: x, y: 0).applying(trans)
-                    .adding(x: -labelSize.width/2)
-                    .adding(y: 1)
-                
-                label.draw(
-                    at: labelDrawPoint,
-                    withAttributes:
-                    [NSAttributedString.Key.font: UIFont.systemFont(ofSize: labelFontSize),
-                     NSAttributedString.Key.foregroundColor: axisColor]
-                )
-            }
+            let label = "\(Int(x))" as NSString
+            let labelSize = "\(Int(x))".size(withSystemFontSize: labelFontSize)
+            let labelDrawPoint = CGPoint(x: x, y: 0).applying(trans)
+                .adding(x: -labelSize.width/2)
+                .adding(y: 1)
+
+            label.draw(
+                at: labelDrawPoint,
+                withAttributes:
+                [NSAttributedString.Key.font: UIFont.systemFont(ofSize: labelFontSize),
+                 NSAttributedString.Key.foregroundColor: axisColor]
+            )
         }
-        for y in stride(from: self.minY, through: self.minX, by: deltaY) {
-            
-            let tickPoints = showInnerLines ?
-                [CGPoint(x: self.minX, y: y).applying(trans), CGPoint(x: self.maxX, y: y).applying(trans)] :
-                [CGPoint(x: 0, y: y).applying(trans), CGPoint(x: 0, y: y).applying(trans).adding(x: 5)]
-            
-            
-            thinnerLines.addLines(between: tickPoints)
-            
+        
+        for y in stride(from: self.minY, through: self.maxY, by: deltaY) {
             if y != self.minY {
                 let label = "\(Int(y))" as NSString
                 let labelSize = "\(Int(y))".size(withSystemFontSize: labelFontSize)
                 let labelDrawPoint = CGPoint(x: 0, y: y).applying(trans)
                     .adding(x: -labelSize.width - 1)
                     .adding(y: -labelSize.height/2)
-                
+
                 label.draw(
                     at: labelDrawPoint,
                     withAttributes:
@@ -241,14 +215,11 @@ class LineGraphView: UIView {
                      NSAttributedString.Key.foregroundColor: axisColor])
             }
         }
+        
         context.setStrokeColor(axisColor.cgColor)
         context.setLineWidth(axisLineWidth)
         context.addPath(thickerLines)
         context.strokePath()
-        
-        context.setStrokeColor(axisColor.withAlphaComponent(0.5).cgColor)
-        context.setLineWidth(axisLineWidth/2)
-        context.addPath(thinnerLines)
-        context.strokePath()
+        setNeedsDisplay()
     }
 }

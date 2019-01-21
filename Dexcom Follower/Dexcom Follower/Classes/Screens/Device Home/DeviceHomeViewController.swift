@@ -186,8 +186,21 @@ class DeviceHomeViewController: UIViewController {
         )
         chart.backgroundColor = .clear
         chart.translatesAutoresizingMaskIntoConstraints = false
-        chart.data = [CGPoint(x: 1.0, y: 2.0), CGPoint(x: 2.0, y: 6.0), CGPoint(x: 2.5, y: 8.0), CGPoint(x: 3.0, y: 6.0), CGPoint(x: 4.0, y: 2.0)]
         chart.colors = [.blue, .green]
+        
+        viewModel.data
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .observeOn(MainScheduler.instance)
+            .skip(1)
+            .subscribe(onNext: { data in
+                var tmp = data
+                for i in 0..<tmp.count {
+                    tmp[i].y = tmp[i].y / 9
+                }
+                chart.data = Array(tmp)
+                chart.setNeedsDisplay()
+            })
+            .disposed(by: disposeBag)
         
         return chart
     }()
