@@ -146,6 +146,8 @@ class LineGraphView: UIView {
         
         let trans = setTransform(minX: self.minX, maxX: self.maxX, minY: self.minY, maxY: self.maxY)
         drawAxis(in: context, usingTransform: trans)
+        
+        setNeedsLayout()
     }
     
     // MARK: - UI
